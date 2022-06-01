@@ -10,3 +10,16 @@ docker build -t dict-server:1.0.0 .
 docker run -d --name my-dict-server -v /host/path/ext_dict:/usr/src/app/static:rw -p 10006:10006  dict-server:1.0.0
 ```
 `/host/path/ext_dict` 替换为宿主机实际es自定义词典文件路径
+
+```bash
+curl -X POST 'http://127.0.0.1:10006/dict' \
+-H 'Content-Type: application/json' \
+-d '{
+  "dictSource": "hot_search",
+  "dicts": [
+    "小米15",
+    "小米手机",
+    "小米手环7"
+  ]
+}'
+```
