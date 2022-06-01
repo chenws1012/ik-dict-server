@@ -11,7 +11,7 @@ docker run -d --name my-dict-server -v /host/path/ext_dict:/usr/src/app/static:r
 ```
 `/host/path/ext_dict` 替换为宿主机实际es自定义词典文件路径
 
-##### 接口
+##### API
 * 热更新词库请求
 ```bash
 curl -X POST 'http://127.0.0.1:10006/dict' \
