@@ -8,6 +8,7 @@ import configparser
 
 app = Flask(__name__)
 
+# 布隆过滤器，词库去重复
 bloom = BloomFilter(max_elements=1000000, error_rate=0.0001)
 
 # 创建配置文件对象
