@@ -1,4 +1,4 @@
-#### IK分词器自定义词库服务，热更新ES自定义词库。IK Analysis custom Dictionary service
+#### [IK分词器](https://github.com/medcl/elasticsearch-analysis-ik)自定义词库服务，热更新ES自定义词库。IK Analysis custom Dictionary service
 
 ##### 构建
 ```
