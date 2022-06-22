@@ -32,6 +32,26 @@ def put_dict():
     return "Done"
 
 
+@app.delete('/dict')
+def delete():
+    word = request.args.get('word')
+    if not word:
+        return 'Done'
+
+    with open(config['app']['dict_file'], 'r') as f:
+        lines = f.readlines()
+    with open(config['app']['dict_file'], 'w') as f_w:
+        for line in lines:
+            word2 = line.replace('\n', '')
+            if word == word2:
+                continue
+            f_w.write(line)
+
+    return 'Done'
+
+
+
+
 def load_dict():
     print('dict loading...')
     with open(config['app']['dict_file'], 'r') as f:
