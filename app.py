@@ -9,7 +9,7 @@ import configparser
 app = Flask(__name__)
 
 # 布隆过滤器，词库去重复
-bloom = BloomFilter(max_elements=1000000, error_rate=0.0001)
+bloom: BloomFilter
 
 # 创建配置文件对象
 config = configparser.ConfigParser()
@@ -34,26 +34,33 @@ def put_dict():
 
 @app.delete('/dict')
 def delete():
-    word = request.args.get('word')
-    if not word:
-        return 'Done'
+    body = request.json
+    dicts = body.get("dicts")
 
     with open(config['app']['dict_file'], 'r') as f:
         lines = f.readlines()
     with open(config['app']['dict_file'], 'w') as f_w:
         for line in lines:
             word2 = line.replace('\n', '')
-            if word == word2:
+            existed = False
+            for word in dicts:
+                if word == word2:
+                    existed = True
+                    break
+
+            if existed:
                 continue
             f_w.write(line)
+
+        load_dict()
 
     return 'Done'
 
 
-
-
 def load_dict():
     print('dict loading...')
+    global bloom
+    bloom = BloomFilter(max_elements=1000000, error_rate=0.0001)
     with open(config['app']['dict_file'], 'r') as f:
         line = f.readline()
         while line:
