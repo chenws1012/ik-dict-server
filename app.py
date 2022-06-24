@@ -41,7 +41,7 @@ def delete():
         lines = f.readlines()
     with open(config['app']['dict_file'], 'w') as f_w:
         for line in lines:
-            word2 = line.replace('\n', '')
+            word2 = line.strip("\n")
             existed = False
             for word in dicts:
                 if word == word2:
@@ -65,7 +65,7 @@ def load_dict():
         line = f.readline()
         while line:
             # print(line, end='')
-            word = line.replace('\n', '')
+            word = line.strip('\n')
             bloom.add(word)
             line = f.readline()
 

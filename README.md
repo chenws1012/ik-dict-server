@@ -26,6 +26,20 @@ curl -X POST 'http://127.0.0.1:10006/dict' \
 }'
 ```
 
+* 热删除词库请求
+```bash
+curl -X DELETE 'http://127.0.0.1:10006/dict' \
+-H 'Content-Type: application/json' \
+-d '{
+  "dictSource": "hot_search",
+  "dicts": [
+    "小米15",
+    "小米手机",
+    "小米手环7"
+  ]
+}'
+```
+
 * 查看自定义词库
 ```bash
 curl -X GET 'http://127.0.0.1:10006/static/mydict.dic'
